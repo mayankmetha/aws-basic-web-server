@@ -1,0 +1,27 @@
+<form style="margin: auto">
+    <mat-form-field style="margin-top: 20px">
+        <input matInput type="text" name="searchText" placeholder="Search" [(ngModel)]="searchText">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="search()" style="margin: 10px">Search</button>
+    <mat-error *ngIf="errorText">Failed to fetch books: <strong color="red">{{errorText}}</strong></mat-error>
+</form>
+<div *ngIf="books" class="display-cards">
+    <mat-card *ngFor="let book of books" class="book-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h3>{{book.title}}</h3>
+            </mat-card-title>
+            <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+            <mat-icon svgIcon="book" style="margin: auto; margin-right: 0"></mat-icon>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+            {{book.description}}
+        </mat-card-content>
+        <mat-card-footer class="card-footer">
+            <button mat-raised-button color="primary" class="card-button">Buy Now</button>
+        </mat-card-footer>
+    </mat-card>
+</div>
+<div *ngIf="!books || books.length === 0">
+    <span>No books to show! Try again later.</span>
+</div>

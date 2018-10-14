@@ -1,0 +1,25 @@
+.display-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.book-card {
+    width: 25%;
+    margin: 10px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.card-content {
+    text-align: justify;
+    height: 50%;
+}
+
+.card-footer {
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    text-align: end;
+}
