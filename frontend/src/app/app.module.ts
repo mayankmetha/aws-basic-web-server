@@ -12,11 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BooksService } from './service/books.service';
 import { HttpService } from './service/http.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SellerComponent } from './seller/seller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    SellerComponent
   ],
   imports: [
     BrowserModule,

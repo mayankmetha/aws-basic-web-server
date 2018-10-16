@@ -1,4 +1,3 @@
-
 export interface Book {
     isbn: string;
     title: string;
@@ -6,4 +5,5 @@ export interface Book {
     publisher: string;
     description: string;
     price: string;
+    quantity: number;
 }

@@ -1,3 +1,8 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h1>{{title}}</h1>
+    </mat-toolbar-row>
+</mat-toolbar>
 <form style="margin: auto">
     <mat-form-field style="margin-top: 20px">
         <input matInput type="text" name="searchText" placeholder="Search" [(ngModel)]="searchText">
@@ -18,6 +23,7 @@
             {{book.description}}
         </mat-card-content>
         <mat-card-footer class="card-footer">
+            <p style="color:red; font-size: 0.75em;"><b>{{book.quantity}} Left In Stock</b></p>
             <button mat-raised-button color="primary" class="card-button">Buy Now</button>
         </mat-card-footer>
     </mat-card>

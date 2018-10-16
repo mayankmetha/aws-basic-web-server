@@ -7,19 +7,17 @@
 
 .book-card {
     width: 25%;
-    margin: 10px;
+    margin: 1em;
     vertical-align: middle;
     text-align: center;
 }
 
 .card-content {
     text-align: justify;
-    height: 50%;
+    vertical-align: middle;
+    height: 45%;
 }
 
 .card-footer {
-    margin-right: auto;
-    margin-bottom: auto;
-    margin-top: auto;
-    text-align: end;
+    margin-bottom: 10px;
 }

@@ -2,7 +2,7 @@ var express = require("express");
 var path = require("path");
 var fs = require("fs");
 
-var db = JSON.parse(fs.readFileSync(path.join(__dirname + "/payload/db")));
+var db = JSON.parse(fs.readFileSync(path.join(__dirname + "/db")));
 
 var app = express();
 

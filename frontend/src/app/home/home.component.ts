@@ -11,12 +11,15 @@ export class HomeComponent implements OnInit {
   public books: Book[];
   public searchText: string;
   public errorText: string;
+  public title: string;
 
   constructor(private booksService: BooksService) {
     this.books = [];
+    this.title = "BookKart"
   }
 
   ngOnInit() {
+    this.search();
   }
 
   public search(): void {
