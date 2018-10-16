@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "@angular/cli": "^6.2.5",
+    "@angular/material": "^6.4.7",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "nodemon": "^1.18.4"
   }
 }
