@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
+var booksManager = require("./booksManager.js");
 
 var db = JSON.parse(fs.readFileSync(path.join(__dirname + "/db")));
 
@@ -13,7 +14,12 @@ app.use(function(req, res, next) {
 });
 
 app.get("/books", (req, res) => {
-    res.send(db)
+    //res.send(db)
+    if(req.query.searchText === undefined) {
+        res.send(booksManager.getAllBooks());
+    } else {
+        res.send(booksManager.searchBooks(req.query.searchText));
+    }
 });
 
 app.listen(80);
