@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "frontend": "cd frontend && npm start",
+    "start": "concurrent \"nodemon index.js\" \"npm run frontend\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "concurrently": "^1.0.0",
+    "express": "^4.16.3",
+    "nodemon": "^1.18.4"
   }
 }
