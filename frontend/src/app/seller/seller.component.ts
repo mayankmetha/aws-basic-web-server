@@ -9,7 +9,7 @@ export class SellerComponent implements OnInit {
   public title: string;
 
   constructor() { 
-    this.title = "BookKart Admin";
+    this.title = "BookKart Seller";
   }
 
   ngOnInit() {
