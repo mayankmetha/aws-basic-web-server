@@ -20,42 +20,49 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get("/books", (req, res) => {
-    //res.send(db)
     if (req.query.searchText === undefined) {
-        res.json(booksManager.getAllBooks());
+        booksManager.getAllBooks().then(function (data) {
+            res.json(data);
+        }).catch(function (err) {
+            res.status(500).send(err);
+        });
     } else {
-        res.json(booksManager.searchBooks(req.query.searchText));
+        booksManager.searchBooks(req.query.searchText).then(function (data) {
+            res.json(data);
+        }).catch(function (err) {
+            res.status(404).send(err);
+        });
     }
 });
 
 app.delete("/books", (req, res) => {
-    if (!req.body || !req.body.isbn || !req.body.quantity || !(typeof req.body.quantity == 'number')) {
-        res.status(400).send("Expected parameters: {isbn, quantity}");
+    if (!req.body || !req.body.isbn || !req.body.quantity || !(typeof req.body.quantity == 'number') ||
+        req.body.quantity <= 0) {
+        res.status(400).send("Invalid / Missing parameters: {isbn, quantity}");
         return;
     }
 
-    try {
-        booksManager.buyBook(req.body.isbn, req.body.quantity);
+    booksManager.buyBook(req.body.isbn, req.body.quantity).then(function (data) {
         console.log("Book bought!");
         res.status(204).end();
-    } catch (err) {
-        res.send(err);
-    }
+    }).catch(function (err) {
+        res.status(500).send(err);
+    });
 });
 
 app.post("/books", (req, res) => {
-    if (!req.body || !req.body.isbn || !req.body.quantity || !req.body.price ||
-        !(typeof req.body.price == 'number') || (!typeof req.body.quantity == 'number')) {
+    if (!req.body || !req.body.isbn || !req.body.quantity ||
+        (!typeof req.body.quantity == 'number') || req.body.quantity <= 0) {
         res.status(400).send("Invalid request");
         return;
     }
 
-    try {
-        booksManager.addBook(req.body);
+    booksManager.addBook(req.body).then(function (data) {
+        console.log("Added books!");
         res.status(201).end();
-    } catch (err) {
+    }).catch(function (err) {
         res.status(500).send(err);
-    }
+    });
 });
 
 app.listen(80);
