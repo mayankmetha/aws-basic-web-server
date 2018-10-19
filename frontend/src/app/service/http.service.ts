@@ -24,4 +24,8 @@ export class HttpService {
             body: book
         });
     }
+
+    public post(relativeUrl: string, book): Observable<any> {
+        return this.httpClient.post(this.baseServerUrl + '/' + relativeUrl, book);
+    }
 }

@@ -1,39 +1,52 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <h1>{{title}}</h1>
-    </mat-toolbar-row>
+  <mat-toolbar-row>
+    <h1>{{title}}</h1>
+  </mat-toolbar-row>
 </mat-toolbar>
-<form class="bookForm">
+<div *ngIf="bookAdded"><strong>Successfully added the books!</strong></div>
+<div *ngIf="errorText"><strong>{{errorText}}</strong></div>
+<div style="height: 50%; overflow: auto; width: 50%; margin: auto" *ngIf="!loading">
+  <form class="bookForm">
     <mat-form-field class="bookForm">
-        <input matInput placeholder="ISBN" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let book of books" [value]="book.isbn">{{book.isbn}}</mat-option>
-        </mat-autocomplete>
+      <input matInput placeholder="ISBN" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+        <mat-option *ngFor="let book of books" [value]="book.isbn">{{book.isbn}}</mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Title">
+      <input matInput name="title" placeholder="Title" [(ngModel)]="selectedBook.title" required>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Author">
+      <input matInput name="subtitle" placeholder="SubTitle" [(ngModel)]="selectedBook.subtitle" required>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Publisher">
+      <input matInput name="author" placeholder="Author" [(ngModel)]="selectedBook.author" required>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Description">
+      <input matInput name="publisher" placeholder="Publisher" [(ngModel)]="selectedBook.publisher" required>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Price">
+      <textarea matInput name="desciption" placeholder="Description" [(ngModel)]="selectedBook.description"></textarea>
     </mat-form-field>
     <br>
     <mat-form-field class="bookForm">
-        <input matInput placeholder="Quantity">
+      <input matInput name="price" placeholder="Price" [(ngModel)]="selectedBook.price" required>
     </mat-form-field>
     <br>
-    <button mat-raised-button color="primary" class="button">ADD</button>
-</form>
+    <mat-form-field class="bookForm">
+      <input matInput name="quantity" placeholder="Quantity" [(ngModel)]="selectedBook.quantity" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="bookForm">
+      <input matInput name="pages" placeholder="Pages" [(ngModel)]="selectedBook.pages">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" class="card-button" (click)="addBook()">ADD</button>
+  </form>
+</div>
+<mat-spinner mode="indeterminate" style="margin: auto" *ngIf="loading"></mat-spinner>

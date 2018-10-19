@@ -12,10 +12,12 @@ export class SellerComponent implements OnInit {
   public books: Book[];
   public quantity: string;
   public errorText: string;
+  public selectedBook = {};
+  public loading = false;
+  public bookAdded = false;
 
   constructor(private booksService: BooksService) {
     this.title = "BookKart Seller";
-
   }
 
   ngOnInit() {
@@ -32,6 +34,29 @@ export class SellerComponent implements OnInit {
         this.errorText = error;
       }
     );
+  }
+
+  public optionSelected(option) {
+    for(let book of this.books) {
+      if(book.isbn === option.option.value) {
+        this.selectedBook = book;
+        break;
+      }
+    }
+  }
+
+  public addBook(): void {
+    this.loading = true;
+    this.errorText = undefined;
+    this.booksService.addBook(<Book>this.selectedBook).subscribe(data => {
+      this.bookAdded = true;
+      this.selectedBook = {};
+      this.loading = false;
+    }, error => {
+      this.selectedBook = {};
+      this.errorText = error.error;
+      this.loading = false;
+    });
   }
 
 }

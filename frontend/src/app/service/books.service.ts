@@ -50,4 +50,15 @@ export class BooksService {
       });
     })
   }
+
+  public addBook(book: Book): Observable<void> {
+    return new Observable<void>(observer => {
+      this.httpService.post('books', book).subscribe(data => {
+        observer.next(data);
+      },
+      error => {
+        observer.error(error);
+      }
+    });
+  }
 }

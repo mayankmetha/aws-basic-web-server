@@ -55,7 +55,7 @@
         });
     }
 
-    isNullOrEmpty = function(value) {
+    isNullOrEmpty = function (value) {
         if (value && value !== "") {
             return true;
         }
@@ -69,19 +69,27 @@
                 if (book.price && typeof book.price === 'number') {
                     findIsbn.price = book.price;
                 }
-                findIsbn.quantity = book.quantity + findIsbn.quantity;
+                if (typeof book.quantity === 'number' && typeof findIsbn.quantity === 'number') {
+                    findIsbn.quantity = book.quantity + findIsbn.quantity;
+                } else if (!typeof book.quantity === 'number') {
+                    reject("Invalid quantity: " + book.quantity);
+                    return;
+                } else {
+                    findIsbn.quantity = Number(book.quantity) + Number(findIsbn.quantity);
+                }
                 db.update(book.isbn, findIsbn).then(function (data) {
                     resolve();
                 }).catch(function (err) {
                     reject("Failed to add the book: " + err);
                 });
             }).catch(function (err) {
+                console.log(err);
                 if (isNullOrEmpty(book.title) ||
                     isNullOrEmpty(book.subtitle) ||
                     isNullOrEmpty(book.author) ||
                     (isNullOrEmpty(book.price) || typeof book.price !== 'number') ||
                     (isNullOrEmpty(book.quantity) || typeof book.price !== 'number')) {
-                    reject("The book details are not sufficient, enter all details");
+                    reject("The book details are not sufficient, enter all/correct details");
                 }
                 db.createObj(book).then(function (data) {
                     resolve();
