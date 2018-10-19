@@ -11,7 +11,7 @@ export class BooksService {
   public getAllBooks(): Observable<Book[]> {
     return new Observable<Book[]>(observer => {
       this.httpService.get('books').subscribe(data => {
-        observer.next(<Book[]>data.books);
+        observer.next(<Book[]>data);
       },
       error => {
         observer.error(error)
