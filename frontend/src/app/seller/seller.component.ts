@@ -25,13 +25,16 @@ export class SellerComponent implements OnInit {
   }
 
   public search(): void {
+    this.loading = true;
     this.booksService.getAllBooks().subscribe(
       books => {
         this.books = books;
+        this.loading = false;
       },
       error => {
         console.error("Failed to get books: ",error);
-        this.errorText = error;
+        this.errorText = error.error;
+        this.loading = false;
       }
     );
   }

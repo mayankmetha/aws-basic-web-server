@@ -58,7 +58,7 @@ export class BooksService {
       },
       error => {
         observer.error(error);
-      }
+      });
     });
   }
 }

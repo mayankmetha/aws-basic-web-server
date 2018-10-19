@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <h1>{{title}}</h1>
+    <button mat-raised-button color="accent" style="float: right; margin-left: auto" [routerLink]="['/home']">Home</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <div *ngIf="bookAdded"><strong>Successfully added the books!</strong></div>
