@@ -13,7 +13,6 @@
 
     exports.searchBooks = function (searchKey) {
         console.log("Searching for books that contain the string: [", searchKey, "]");
-        searchKey = searchKey.toLowerCase();
 
         return new Promise(function (resolve, reject) {
             db.query(searchKey).then(function (books) {

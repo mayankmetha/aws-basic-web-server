@@ -11,12 +11,16 @@ export class HttpService {
         this.baseServerUrl = environment.baseServerUrl;
     }
 
-    public get(relativeUrl: string): Observable<any> {
-        return this.httpClient.get(this.baseServerUrl + '/' + relativeUrl);
+    public get(relativeUrl: string, paramsObj?): Observable<any> {
+        if (!paramsObj) {
+            return this.httpClient.get(this.baseServerUrl + '/' + relativeUrl);
+        }
+
+        return this.httpClient.get(this.baseServerUrl + '/' + relativeUrl, { 'params': paramsObj });
     }
 
     public delete(relativeUrl: string, book): Observable<any> {
-        return this.httpClient.request('delete',this.baseServerUrl + '/' + relativeUrl, {
+        return this.httpClient.request('delete', this.baseServerUrl + '/' + relativeUrl, {
             body: book
         });
     }

@@ -10,9 +10,10 @@ import { Book } from 'src/app/model/book.model';
 })
 export class HomeComponent implements OnInit {
   public books: Book[];
-  public searchText: string;
+  public searchText = '';
   public errorText: string;
   public title: string;
+  public searchInProg = false;
 
   constructor(private booksService: BooksService) {
     this.books = [];
@@ -24,24 +25,36 @@ export class HomeComponent implements OnInit {
   }
 
   public search(): void {
-    this.booksService.getAllBooks().subscribe(
+    this.errorText = undefined;
+    this.searchInProg = true;
+    let obs = undefined;
+    this.books = [];
+    if (!this.searchText) {
+      obs = this.booksService.getAllBooks();
+    } else {
+      obs = this.booksService.getBooks(this.searchText);
+    }
+
+    obs.subscribe(
       books => {
         this.books = books;
+        this.searchInProg = false;
       },
       error => {
-        console.error("Failed to get books: ",error);
-        this.errorText = error;
+        console.error("Failed to get books: ", error);
+        this.errorText = error.error;
+        this.searchInProg = false;
       }
     );
   }
 
-  public buy(isbn,quantity): void {
-    this.booksService.deleteBooks(isbn,quantity).subscribe(
+  public buy(isbn, quantity): void {
+    this.booksService.deleteBooks(isbn, quantity).subscribe(
       books => {
         this.search();
       },
       error => {
-        console.error("Failed to buy books: ",error);
+        console.error("Failed to buy books: ", error);
         this.errorText = error;
       }
     );

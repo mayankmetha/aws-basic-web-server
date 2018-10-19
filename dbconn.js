@@ -27,6 +27,7 @@
                     reject(err);
                     return;
                 }
+
                 if (!dbBooks || !dbBooks.Items || dbBooks.Items.length === 0) {
                     reject("No books found in the DB");
                     return;

@@ -39,4 +39,15 @@ export class BooksService {
       })
     });
   }
+
+  public getBooks(searchText: string): Observable<Book[]> {
+    return new Observable<Book[]>(observer => {
+      this.httpService.get('books', {"searchText": searchText}).subscribe(data => {
+        observer.next(<Book[]>data);
+      },
+      error => {
+        observer.error(error);
+      });
+    })
+  }
 }
