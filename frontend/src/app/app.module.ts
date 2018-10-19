@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRouter } from './app.router';
 import { MatToolbarModule, MatCardModule, MatButtonModule, MatPaginatorModule,
-         MatIconModule, MatIconRegistry, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+         MatIconModule, MatIconRegistry, MatInputModule, MatProgressSpinnerModule, MatAutocompleteModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BooksService } from './service/books.service';
@@ -33,6 +33,7 @@ import { SellerComponent } from './seller/seller.component';
     FormsModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule
   ],
   providers: [
     HttpService,
