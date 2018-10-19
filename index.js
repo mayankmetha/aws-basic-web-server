@@ -3,14 +3,17 @@ var path = require("path");
 var fs = require("fs");
 var booksManager = require("./booksManager.js");
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var db = JSON.parse(fs.readFileSync(path.join(__dirname + "/db")));
 
 var app = express();
 
+app.use(cors());
+
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, CORS");
     next();
 });
 

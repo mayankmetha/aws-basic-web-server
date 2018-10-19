@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { BooksService } from 'src/app/service/books.service';
 import { Book } from 'src/app/model/book.model';
 
@@ -31,6 +32,18 @@ export class HomeComponent implements OnInit {
         console.error("Failed to get books: ",error);
         this.errorText = error;
       }
-    )
+    );
+  }
+
+  public buy(isbn,quantity): void {
+    this.booksService.deleteBooks(isbn,quantity).subscribe(
+      books => {
+        this.search();
+      },
+      error => {
+        console.error("Failed to buy books: ",error);
+        this.errorText = error;
+      }
+    );
   }
 }

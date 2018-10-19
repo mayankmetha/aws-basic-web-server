@@ -21,4 +21,22 @@ export class BooksService {
       })
     });
   }
+
+  public deleteBooks(isbn: string, quantity: number): Observable<Book[]> {
+    var book = {
+      "isbn": isbn,
+      "quantity" : quantity
+    };
+    return new Observable<Book[]>(observer => {
+      this.httpService.delete('books',book).subscribe(data => {
+        observer.next(<Book[]>data)
+      },
+      error => {
+        observer.error(error)
+      },
+      () => {
+        observer.complete();
+      })
+    });
+  }
 }

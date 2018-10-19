@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-sdk": "^2.337.0",
     "concurrently": "^1.0.0",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "nodemon": "^1.18.4"
   }
